@@ -11,22 +11,25 @@ double cmag (double complex z) {
 }
 
 double mandItResult (double complex c) {
-    int no_of_it = 80;
-    double complex z = 0;
-    int i = 0;
-    while (i<no_of_it){
-        z = cpow(z,2)+c;
-        i++;
+    if (cmag(c) < 2) {
+        int no_of_it = 80;
+        double complex z = 0;
+        int i = 0;
+        while (i < no_of_it) {
+            z = cpow(z, 2) + c;
+            i++;
+        }
+        double result = cmag(z);
+        return result;
+    }else {
+        double result = cmag(c);
+        return result;
     }
-    double result = cmag(z);
-    return result;
 }
 
 struct rgb_data *MandBMPpixels (double imgw, double imgh, double min_x, double max_x, double min_y, double max_y, struct rgb_data *pixels){
     double xIncr = (max_x - min_x)/imgw;
     double yIncr = (max_y - min_y)/imgh;
-
-    printf("hello");
 
     int image_size = imgw*imgh;
 
