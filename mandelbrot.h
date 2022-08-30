@@ -25,7 +25,7 @@ double mandItResult (double complex c) {
 struct rgb_data *MandBMPpixels (double imgw, double imgh, double min_x, double max_x, double min_y, double max_y, struct rgb_data *pixels){
     double xIncr = (max_x - min_x)/imgw;
     double yIncr = (max_y - min_y)/imgh;
-
+ //testing
     int image_size = imgw*imgh;
 
     for (double dy = 0; dy < imgh; dy++){
