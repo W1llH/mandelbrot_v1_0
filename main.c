@@ -15,4 +15,6 @@ int main() {
     MandBMPpixels(width,height,-2,1,-1.5,1.5,pixels);
 
     save_bmp("mandelbrot_smol.bmp", width, height, dpi, pixels);
+    
+    free(pixels);
 }
