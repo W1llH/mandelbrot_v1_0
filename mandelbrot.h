@@ -31,12 +31,10 @@ struct rgb_data *MandBMPpixels (double imgw, double imgh, double min_x, double m
     double xIncr = (max_x - min_x)/imgw;
     double yIncr = (max_y - min_y)/imgh;
 
-    int image_size = imgw*imgh;
-
     for (double dy = 0; dy < imgh; dy++){
         for (double dx = 0; dx < imgw; dx++){
             int i = dy*imgw + dx;
-            double complex z = (min_x + dx*xIncr) + (max_y-dy*yIncr)*I;
+            double complex z = (min_x + dx*xIncr) + (min_y + dy*yIncr)*I;
             if (mandItResult(z)<2){
                 (pixels[i]).r = 255;
                 (pixels[i]).g = 255;

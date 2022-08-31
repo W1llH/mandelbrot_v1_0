@@ -8,13 +8,15 @@
 
 int main() {
 
-    int width  = 400, height = 400, dpi = 10;
+    int width  = 200, height = 200, dpi = 100;
 
-    struct rgb_data *pixels = malloc(width*height*sizeof(struct rgb_data));
+    struct rgb_data *pixels;
 
-    MandBMPpixels(width,height,-2,1,-1.5,1.5,pixels);
+    pixels = (struct rgb_data *) malloc(width*height*sizeof(struct rgb_data));
 
-    save_bmp("mandelbrot_smol.bmp", width, height, dpi, pixels);
-    
+    MandBMPpixels(width,height,-1,0,0,1,pixels);
+
+    save_bmp("mandelbrot_after.bmp", width, height, dpi, pixels);
+
     free(pixels);
 }
