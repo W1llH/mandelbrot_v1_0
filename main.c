@@ -13,7 +13,7 @@ int main() {
 
     start = clock();
 
-    int width  = 500, height = 500, dpi = 100;
+    int width  = 2000, height = 2000, dpi = 100;
 
     struct rgb_data *pixels;
 
