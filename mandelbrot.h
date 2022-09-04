@@ -27,7 +27,7 @@ double mandItResult (const double complex c, const unsigned int no_of_it) {
     }
 }
 
-struct rgb_data *MandBMPpixels (double imgw, double imgh, double min_x, double max_x, double min_y, double max_y, const unsigned int iterations, struct rgb_data *pixels){;
+struct rgb_data *MandBMPpixels (double imgw, double imgh, double min_x, double max_x, double min_y, double max_y, const unsigned int iterations, struct rgb_data *pixels){
     double xIncr = (max_x - min_x)/imgw;
     double yIncr = (max_y - min_y)/imgh;
 
@@ -36,13 +36,13 @@ struct rgb_data *MandBMPpixels (double imgw, double imgh, double min_x, double m
             unsigned int i = dy*(unsigned int)imgw + dx;
             double complex c = (min_x + (double)dx*xIncr) + (min_y + (double)dy*yIncr)*I;
             if (mandItResult(c, iterations)<2){
-                (pixels[i]).r = 255;
-                (pixels[i]).g = 255;
-                (pixels[i]).b = 255;
+                (pixels[i]).r = (unsigned char)255;
+                (pixels[i]).g = (unsigned char)255;
+                (pixels[i]).b = (unsigned char)255;
             } else{
-                (pixels[i]).r = 0;
-                (pixels[i]).g = 0;
-                (pixels[i]).b = 0;
+                (pixels[i]).r = (unsigned char)0;
+                (pixels[i]).g = (unsigned char)0;
+                (pixels[i]).b = (unsigned char)0;
             }
         }
     }

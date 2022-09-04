@@ -5,7 +5,7 @@
 #include <string.h>
 
 struct rgb_data{
-    float r, g, b;
+    unsigned char r, g, b;
 };
 
 void save_bmp(const char *file_name, int width, int height, int dpi, struct rgb_data *pixel_data){
@@ -15,7 +15,7 @@ void save_bmp(const char *file_name, int width, int height, int dpi, struct rgb_
 
     int file_size = 54 + 3*image_size; /*in bytes, 14 for file header, 40 for image header and
                                          3 bytes per pixel for 24 bit pixel */
-    int ppm = dpi*39.37; //pixels per meter
+    int ppm = dpi*(int)39.37; //pixels per meter
 
 
     struct bmp_file_header{           //file header, 14 bytes
@@ -65,15 +65,11 @@ void save_bmp(const char *file_name, int width, int height, int dpi, struct rgb_
     for (int i = 0; i < image_size; i++){
         struct rgb_data BGR = pixel_data[i];
 
-        float red = (BGR.r);
-        float green = (BGR.g);
-        float blue = (BGR.b);
-
-        unsigned char colour[3] = {blue, green, red};
+        unsigned char colour[3] = {BGR.b, BGR.g, BGR.r};
 
         fwrite(colour, sizeof(colour), 1, image);
     }
     fclose(image);
-};
+}
 
 #endif //MANDELBROT_V1_0_BMP_H
