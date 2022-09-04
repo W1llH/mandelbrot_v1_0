@@ -19,13 +19,13 @@ int main() {
 
     pixels = (struct rgb_data *) malloc(width*height*sizeof(struct rgb_data));
 
-    int *iterations_ptr = (int *) malloc(sizeof(int));
+    unsigned int *iterations_ptr = (unsigned int *) malloc(sizeof(unsigned int));
 
     *iterations_ptr = 80;
 
     MandBMPpixels(width,height,-1,0,0,1,iterations_ptr, pixels);
 
-    save_bmp("mandelbrot.bmp", width, height, dpi, pixels);
+    save_bmp("mandelbrot_double.bmp", width, height, dpi, pixels);
 
     free(pixels);
     free(iterations_ptr);
@@ -33,7 +33,7 @@ int main() {
     end = clock();
 
     time_taken = ((double)end - start)/CLOCKS_PER_SEC;
-    printf("The program took %lf seconds to complete.",time_taken);
+    printf("The program took %lf seconds to complete.\n",time_taken);
 
     return 0;
 }

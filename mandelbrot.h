@@ -5,8 +5,8 @@
 #include <complex.h>
 #include "bmp.h"
 
-float cmag (double complex z) {
-    float magnitude = (float)sqrt(pow(creal(z),2)+pow(cimag(z),2));
+double cmag (double complex z) {
+    double magnitude = sqrt(pow(creal(z),2)+pow(cimag(z),2));
     return magnitude;
 }
 
@@ -21,7 +21,7 @@ double mandItResult (double complex c, unsigned int *no_of_it) {
             (*i)++;
         }
         while (cmag((*z)) < 2 && (*i) < *no_of_it);
-        float result = cmag((*z));
+        double result = cmag((*z));
         free(i);
         free(z);
         return result;
@@ -31,14 +31,14 @@ double mandItResult (double complex c, unsigned int *no_of_it) {
     }
 }
 
-struct rgb_data *MandBMPpixels (float imgw, float imgh, float min_x, float max_x, float min_y, float max_y, unsigned int *iterations, struct rgb_data *pixels){;
-    float xIncr = (max_x - min_x)/imgw;
-    float yIncr = (max_y - min_y)/imgh;
+struct rgb_data *MandBMPpixels (double imgw, double imgh, double min_x, double max_x, double min_y, double max_y, unsigned int *iterations, struct rgb_data *pixels){;
+    double xIncr = (max_x - min_x)/imgw;
+    double yIncr = (max_y - min_y)/imgh;
 
     for (unsigned int dy = 0; dy < (unsigned int)imgh; dy++){
         for (unsigned int dx = 0; dx < (unsigned int)imgw; dx++){
             unsigned int i = dy*(unsigned int)imgw + (unsigned int)dx;
-            float complex c = (min_x + (float)dx*xIncr) + (min_y + (float)dy*yIncr)*I;
+            double complex c = (min_x + (double)dx*xIncr) + (min_y + (double)dy*yIncr)*I;
             if (mandItResult(c, iterations)<2){
                 (pixels[i]).r = 255;
                 (pixels[i]).g = 255;
