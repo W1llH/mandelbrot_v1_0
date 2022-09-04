@@ -12,18 +12,14 @@ double cmag (const double complex z) {
 
 double mandItResult (const double complex c, const unsigned int *no_of_it) {
     if (cmag(c) < 2) {
-        unsigned int *i = (unsigned int *)malloc(sizeof(unsigned int)); // limits possible iterations to 255 for now
-        *i = 0;
-        double complex *z = (double complex *)malloc(sizeof(double complex));
-        *z=0;
+        unsigned int i = 0;
+        double complex z=c;
         do {
-            *z = cpow(*z, 2) + c;
-            (*i)++;
+            z = cpow(z, 2) + c;
+            (i)++;
         }
-        while (cmag((*z)) < 2 && (*i) < *no_of_it);
-        double result = cmag((*z));
-        free(i);
-        free(z);
+        while (cmag((z)) < 2 && (i) < (*no_of_it)-1);
+        double result = cmag((z));
         return result;
     }else {
         double result = cmag(c);
