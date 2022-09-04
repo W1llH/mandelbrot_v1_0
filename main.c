@@ -19,16 +19,13 @@ int main() {
 
     pixels = (struct rgb_data *) malloc(width*height*sizeof(struct rgb_data));
 
-    unsigned int *iterations_ptr = (unsigned int *) malloc(sizeof(unsigned int));
+    unsigned int iterations = 80;
 
-    *iterations_ptr = 80;
-
-    MandBMPpixels(width,height,-1,0,0,1,iterations_ptr, pixels);
+    MandBMPpixels(width,height,-1,0,0,1, iterations, pixels);
 
     save_bmp("mandelbrot_double.bmp", width, height, dpi, pixels);
 
     free(pixels);
-    free(iterations_ptr);
 
     end = clock();
 

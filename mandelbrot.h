@@ -10,15 +10,15 @@ double cmag (const double complex z) {
     return magnitude;
 }
 
-double mandItResult (const double complex c, const unsigned int *no_of_it) {
+double mandItResult (const double complex c, const unsigned int no_of_it) {
     if (cmag(c) < 2) {
-        unsigned int i = 0;
+        unsigned int i = 1;
         double complex z=c;
         do {
             z = cpow(z, 2) + c;
             (i)++;
         }
-        while (cmag((z)) < 2 && (i) < (*no_of_it)-1);
+        while (cmag((z)) < 2 && (i) < (no_of_it));
         double result = cmag((z));
         return result;
     }else {
@@ -27,7 +27,7 @@ double mandItResult (const double complex c, const unsigned int *no_of_it) {
     }
 }
 
-struct rgb_data *MandBMPpixels (double imgw, double imgh, double min_x, double max_x, double min_y, double max_y, const unsigned int *iterations, struct rgb_data *pixels){;
+struct rgb_data *MandBMPpixels (double imgw, double imgh, double min_x, double max_x, double min_y, double max_y, const unsigned int iterations, struct rgb_data *pixels){;
     double xIncr = (max_x - min_x)/imgw;
     double yIncr = (max_y - min_y)/imgh;
 
