@@ -9,9 +9,9 @@
 int main() {
 
     clock_t start, end;
-    long time_taken;
+    double time_taken;
 
-    start = clock()
+    start = clock();
 
     int width  = 500, height = 500, dpi = 100;
 
@@ -32,8 +32,8 @@ int main() {
 
     end = clock();
 
-    time_taken = (end - start)/CLOCKS_PER_SEC;
-    printf("The program took %l seconds to complete.",time_taken);
+    time_taken = ((double)end - start)/CLOCKS_PER_SEC;
+    printf("The program took %lf seconds to complete.",time_taken);
 
     return 0;
 }
