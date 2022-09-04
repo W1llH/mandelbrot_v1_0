@@ -10,16 +10,20 @@ double cmag (double complex z) {
     return magnitude;
 }
 
-double mandItResult (double complex c) {
+double mandItResult (double complex c, int *no_of_it) {
     if (cmag(c) < 2) {
-        int no_of_it = 80;
-        double complex z = 0;
-        int i = 0;
-        while (i < no_of_it) {
-            z = cpow(z, 2) + c;
-            i++;
+        int *i = (int *)malloc(sizeof(int));
+        *i = 0;
+        double complex *z = (double complex *)malloc(sizeof(double complex));
+        *z=0;
+        do {
+            *z = cpow(*z, 2) + c;
+            (*i)++;
         }
-        double result = cmag(z);
+        while (cmag((*z)) < 2 && (*i) < *no_of_it);
+        double result = cmag((*z));
+        free(i);
+        free(z);
         return result;
     }else {
         double result = cmag(c);
@@ -27,15 +31,15 @@ double mandItResult (double complex c) {
     }
 }
 
-struct rgb_data *MandBMPpixels (double imgw, double imgh, double min_x, double max_x, double min_y, double max_y, struct rgb_data *pixels){
+struct rgb_data *MandBMPpixels (double imgw, double imgh, double min_x, double max_x, double min_y, double max_y, int *iterations, struct rgb_data *pixels){;
     double xIncr = (max_x - min_x)/imgw;
     double yIncr = (max_y - min_y)/imgh;
 
-    for (double dy = 0; dy < imgh; dy++){
-        for (double dx = 0; dx < imgw; dx++){
+    for (int dy = 0; dy < imgh; dy++){
+        for (int dx = 0; dx < imgw; dx++){
             int i = dy*imgw + dx;
-            double complex z = (min_x + dx*xIncr) + (min_y + dy*yIncr)*I;
-            if (mandItResult(z)<2){
+            double complex c = (min_x + dx*xIncr) + (min_y + dy*yIncr)*I;
+            if (mandItResult(c, iterations)<2){
                 (pixels[i]).r = 255;
                 (pixels[i]).g = 255;
                 (pixels[i]).b = 255;
