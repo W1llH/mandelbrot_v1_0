@@ -12,7 +12,7 @@ double cmag (const double complex z) {
 
 double mandItResult (const double complex c, const unsigned int *no_of_it) {
     if (cmag(c) < 2) {
-        unsigned char *i = (unsigned char *)malloc(sizeof(unsigned short)); // limits possible iterations to 255 for now
+        unsigned int *i = (unsigned int *)malloc(sizeof(unsigned int)); // limits possible iterations to 255 for now
         *i = 0;
         double complex *z = (double complex *)malloc(sizeof(double complex));
         *z=0;
@@ -35,9 +35,9 @@ struct rgb_data *MandBMPpixels (double imgw, double imgh, double min_x, double m
     double xIncr = (max_x - min_x)/imgw;
     double yIncr = (max_y - min_y)/imgh;
 
-    for (unsigned int dy = 0; dy < (unsigned int)imgh; dy++){
-        for (unsigned int dx = 0; dx < (unsigned int)imgw; dx++){
-            unsigned int i = dy*(unsigned int)imgw + (unsigned int)dx;
+    for (unsigned int dy = (unsigned int)imgh-1; dy--;){
+        for (unsigned int dx = (unsigned int)imgw-1; dx--;){
+            unsigned int i = dy*(unsigned int)imgw + dx;
             double complex c = (min_x + (double)dx*xIncr) + (min_y + (double)dy*yIncr)*I;
             if (mandItResult(c, iterations)<2){
                 (pixels[i]).r = 255;
