@@ -21,7 +21,7 @@ int main() {
 
     unsigned int iterations = 80;
 
-    MandBMPpixels(width,height,-1,0,0,1, iterations, pixels);
+    MandBMPpixels(width,height,-3,3,-3,3, iterations, pixels);
 
     save_bmp("mandelbrot_double.bmp", width, height, dpi, pixels);
 

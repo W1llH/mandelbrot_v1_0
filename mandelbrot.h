@@ -31,19 +31,20 @@ struct rgb_data *MandBMPpixels (double imgw, double imgh, double min_x, double m
     double xIncr = (max_x - min_x)/imgw;
     double yIncr = (max_y - min_y)/imgh;
 
-    for (unsigned int dy = (unsigned int)imgh-1; dy--;){
-        for (unsigned int dx = (unsigned int)imgw-1; dx--;){
-            unsigned int i = dy*(unsigned int)imgw + dx;
+    for (unsigned int dy = (unsigned int)imgh; dy--;){
+        for (unsigned int dx = (unsigned int)imgw; dx--;){
+            unsigned int px = dy*(unsigned int)imgw + dx;
             double complex c = (min_x + (double)dx*xIncr) + (min_y + (double)dy*yIncr)*I;
-            if (mandItResult(c, iterations)<2){
-                (pixels[i]).r = (unsigned char)255;
-                (pixels[i]).g = (unsigned char)255;
-                (pixels[i]).b = (unsigned char)255;
-            } else{
-                (pixels[i]).r = (unsigned char)0;
-                (pixels[i]).g = (unsigned char)0;
-                (pixels[i]).b = (unsigned char)0;
+            unsigned int i = 0;
+            double complex z=0;
+            do {
+                z = cpow(z, 2) + c;
+                i++;
             }
+            while (cmag(z) < 2 && i < iterations);
+            pixels[px].r = (unsigned char)(((float)i/(float)iterations)*255);
+            pixels[px].g = (unsigned char)(((float)i/(float)iterations)*255);
+            pixels[px].b = (unsigned char)(((float)i/(float)iterations)*255);
         }
     }
     return pixels;
