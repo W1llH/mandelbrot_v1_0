@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <malloc.h>
 #include "mandelbrot.h"
 #include <time.h>
 
@@ -10,17 +9,11 @@ int main() {
 
     start = clock();
 
-    int width  = 1000, height = 1000, dpi = 100;
-
-    struct rgb_data *pixels;
-
-    pixels = (struct rgb_data *) malloc(width*height*sizeof(struct rgb_data));
+    int width  = 2000, height = 2000, dpi = 100;
 
     unsigned int iterations = 255;
 
-    save_mand_bmp("mandelbrot_double1.bmp", width, height, dpi, -2, 2, -2, 2, iterations, pixels);
-
-    free(pixels);
+    save_mand_bmp("mandelbrot_testing255.bmp", width, height, dpi, -2, -1, -0.5, 0.5, iterations);
 
     end = clock();
 

@@ -14,7 +14,7 @@ struct rgb_data{
     unsigned char r, g, b;
 };
 
-void save_mand_bmp(const char *file_name, const unsigned int width, const unsigned int height, const unsigned int dpi, const double min_x, const double max_x, const double min_y, const double max_y, const unsigned iterations, struct rgb_data *pixel_data){
+void save_mand_bmp(const char *file_name, const int width, const int height, const unsigned int dpi, const double min_x, const double max_x, const double min_y, const double max_y, const unsigned iterations){
     FILE *image;
 
     int image_size = width*height; //number of pixels
