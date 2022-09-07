@@ -5,16 +5,16 @@
 #include <complex.h>
 #include <memory.h>
 
-double cmag (const double complex z) {
-    double magnitude = sqrt(pow(creal(z),2)+pow(cimag(z),2));
+double cmag2 (const double complex z) {
+    double magnitude = pow(creal(z),2)+pow(cimag(z),2);
     return magnitude;
 }
 
 struct rgb_data{
-    unsigned char r, g, b;
+    unsigned char r, g, b; //24 bit pixel
 };
 
-void save_mand_bmp(const char *file_name, const int width, const int height, const unsigned int dpi, const double min_x, const double max_x, const double min_y, const double max_y, const unsigned iterations){
+void save_mand_bmp(const char *file_name, const int width, const int height, const int dpi, const double min_x, const double max_x, const double min_y, const double max_y, const unsigned iterations){
     FILE *image;
 
     int image_size = width*height; //number of pixels
@@ -80,7 +80,7 @@ void save_mand_bmp(const char *file_name, const int width, const int height, con
                 z = cpow(z, 2) + c;
                 itr++;
             }
-            while (cmag(z) < 2 && itr < iterations);
+            while (cmag2(z) < 4 && itr < iterations);
             unsigned char red = (unsigned char)(((float)itr/(float)iterations)*255);
             unsigned char green = (unsigned char)(((float)itr/(float)iterations)*255);
             unsigned char blue = (unsigned char)(((float)itr/(float)iterations)*255);
