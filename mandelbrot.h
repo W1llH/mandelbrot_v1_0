@@ -10,23 +10,50 @@ double cmag2 (const double complex z) {
     return magnitude;
 }
 
+struct mand_bmp_parameters{
+    char *ptr_file_name; //remember to include .bmp
+    unsigned int width;
+    unsigned int height;
+    unsigned int dpi;
+    double min_x;
+    double max_x;
+    double min_y;
+    double max_y;
+    unsigned int iterations;
+};
+
 struct rgb_data{
     unsigned char r, g, b; //24 bit pixel
 };
 
-void save_mand_bmp(const char *file_name, const int width, const int height, const int dpi, const double min_x, const double max_x, const double min_y, const double max_y, const unsigned iterations){
+void save_mand_bmp(const struct mand_bmp_parameters *mandp){
+
+    char *file_name = mandp->ptr_file_name;
+
+    unsigned int width, height, dpi, iterations;
+    width = mandp->width;
+    height = mandp->height;
+    dpi = mandp->dpi;
+    iterations = mandp->iterations;
+
+    double min_x, max_x, min_y, max_y;
+    min_x = mandp->min_x;
+    max_x = mandp->max_x;
+    min_y = mandp->min_y;
+    max_y = mandp->max_y;
+
     FILE *image;
 
-    int image_size = width*height; //number of pixels
+    unsigned int image_size = width*height; //number of pixels
 
-    int file_size = 54 + 3*image_size; /*in bytes, 14 for file header, 40 for image header and
+    unsigned int file_size = 54 + 3*image_size; /*in bytes, 14 for file header, 40 for image header and
                                          3 bytes per pixel for 24 bit pixel */
-    int ppm = dpi*(int)39.37; //pixels per meter
+    unsigned int ppm = dpi*39; //pixels per meter
 
 
     struct bmp_file_header{           //file header, 14 bytes
         unsigned char bitmap_type[2]; //2 bytes
-        int           file_size;      //4 bytes
+        unsigned int  file_size;      //4 bytes
         short         reserved1;      //2 bytes
         short         reserved2;      //2 bytes
         unsigned int  offset_bits;    //4 bytes
