@@ -12,14 +12,14 @@ int main() {
 
     struct mand_bmp_parameters *mandp = (struct mand_bmp_parameters *)malloc(sizeof(struct mand_bmp_parameters));
 
-    mandp->ptr_file_name = "mandelbrot_testing80_-1_0_0_1.bmp";
-    mandp->width = 2000;
-    mandp->height = 2000;
+    mandp->ptr_file_name = "mandelbrot_testing80_-2_2_-2_2.bmp";
+    mandp->width = 500;
+    mandp->height = 500;
     mandp->dpi = 100;
-    mandp->min_x = -1;
-    mandp->max_x = 0;
-    mandp->min_y = 0;
-    mandp->max_y = 1;
+    mandp->min_x = -2;
+    mandp->max_x = 2;
+    mandp->min_y = -2;
+    mandp->max_y = 2;
     mandp->iterations = 80;
 
     save_mand_bmp(mandp);
